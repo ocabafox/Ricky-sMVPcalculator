@@ -2,7 +2,6 @@ package com.android3.ocabafox.mvpcalculator;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -20,17 +19,18 @@ public class MainActivity extends AppCompatActivity implements iView {
 
     @Bind(R.id.first_number) EditText first_number;
     @Bind(R.id.second_number) EditText second_number;
+    @Bind(R.id.toolbar) Toolbar toolbar;
     String number1,number2;
 
-    Toolbar toolbar;
     Presentor presentor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setupToolbar();
+
         ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
         presentor = new Presentor(this);
 
     }
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements iView {
 
         }
         else if(view.getId() == R.id.btnExit){
-
+            finish();
         }
     }
 
@@ -103,16 +103,5 @@ public class MainActivity extends AppCompatActivity implements iView {
         super.onResume();
         first_number.setFocusableInTouchMode(true);
         first_number.requestFocus();
-    }
-
-    private void setupToolbar(){
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        if(toolbar != null)
-            setSupportActionBar(toolbar);
-
-        // Show menu icon
-        final ActionBar ab = getSupportActionBar();
-        ab.setHomeAsUpIndicator(R.drawable.abc_ic_menu_paste_mtrl_am_alpha);
-        ab.setDisplayHomeAsUpEnabled(true);
     }
 }

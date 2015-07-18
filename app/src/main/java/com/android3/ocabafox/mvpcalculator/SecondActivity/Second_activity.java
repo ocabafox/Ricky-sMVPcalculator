@@ -2,6 +2,7 @@ package com.android3.ocabafox.mvpcalculator.SecondActivity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import com.android3.ocabafox.mvpcalculator.R;
@@ -23,6 +24,7 @@ public class Second_activity extends AppCompatActivity implements iResultView {
     @Bind(R.id.tvOperator) TextView getOperator;
     @Bind(R.id.tvNumber2) TextView getSecondNumber;
     @Bind(R.id.tvResult) TextView getResult;
+    @Bind(R.id.toolbar) Toolbar toolbar;
 
     resultPresenter presentor;
 
@@ -30,7 +32,9 @@ public class Second_activity extends AppCompatActivity implements iResultView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.second_layout_activity);
+
         ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
         presentor = new resultPresenter(this);
         presentor.getIntent();
         presentor.decision(result);
@@ -39,12 +43,12 @@ public class Second_activity extends AppCompatActivity implements iResultView {
 
     @Override
     public void error() {
-        getResult.setText("Failed");
+        getResult.setTextColor(getResources().getColor(R.color.my_accent));
     }
 
     @Override
     public void success() {
-
+        getResult.setTextColor(getResources().getColor(R.color.my_primary_text));
     }
 
     @Override
